@@ -1,0 +1,12 @@
+<div class="income">
+  <label for="income">Income:</label>
+  <input
+    id="income"
+    type="number"
+    min="500"
+    [(ngModel)]="income"
+    name="income"
+    required="true"
+  />
+</div>
+<div *ngIf="income < 500" class="text-danger">Income must be at least 500</div>

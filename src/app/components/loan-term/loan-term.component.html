@@ -1,0 +1,17 @@
+<div class="loanTerm">
+  <label for="loanTerm">Loan Term (in months):</label>
+  <input
+    id="loanTerm"
+    type="number"
+    min="36"
+    max="360"
+    [(ngModel)]="loanTerm"
+    name="loanTerm"
+  />
+</div>
+<div *ngIf="loanTerm < 36" class="text-danger">
+  Loan term must be at least 36 months
+</div>
+<div *ngIf="loanTerm > 360" class="text-danger">
+  Loan term cannot be more than 360 months
+</div>

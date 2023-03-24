@@ -1,0 +1,14 @@
+<div class="requestedAmount">
+  <label for="requestedAmount">Requested Amount:</label>
+  <input
+    id="requestedAmount"
+    type="number"
+    min="20000"
+    [(ngModel)]="requestedAmount"
+    name="requestedAmount"
+    required="true"
+  />
+</div>
+<div *ngIf="requestedAmount < 20000" class="text-danger">
+  Requested amount must be at least 20000
+</div>

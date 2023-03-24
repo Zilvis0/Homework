@@ -1,0 +1,15 @@
+<div class="form">
+  <legend><h1>Please fill the form:</h1></legend>
+
+  <app-income [(income)]="formData.income"></app-income>
+
+  <app-requested-amount
+    [(requestedAmount)]="formData.requestedAmount"
+  ></app-requested-amount>
+
+  <app-loan-term [(loanTerm)]="formData.loanTerm"></app-loan-term>
+
+  <app-children [(children)]="formData.children"></app-children>
+
+  <app-coapplicant [(coapplicant)]="formData.coapplicant"></app-coapplicant>
+</div>

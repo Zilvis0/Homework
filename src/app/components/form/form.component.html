@@ -1,7 +1,7 @@
 <div class="form">
   <legend><h1>Please fill the form:</h1></legend>
 
-  <app-income [(income)]="formData.income"></app-income>
+  <app-income [(income)]="formData.monthlyIncome"></app-income>
 
   <app-requested-amount
     [(requestedAmount)]="formData.requestedAmount"
@@ -12,4 +12,5 @@
   <app-children [(children)]="formData.children"></app-children>
 
   <app-coapplicant [(coapplicant)]="formData.coapplicant"></app-coapplicant>
+  <button (click)="onSubmit()">Submit</button>
 </div>

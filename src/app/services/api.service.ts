@@ -6,18 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private backendUrl = 'https://homework.fdp.workers.dev/';
-  private apiKey = 'swb-222222';
+  private backendUrl = 'http://localhost:4200/';
 
   constructor(private http: HttpClient) {}
 
-  postForm(payload: any): Observable<any> {
+  postForm(formData: FormData): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'X-API-KEY': this.apiKey,
       }),
     };
-    return this.http.post<any>(this.backendUrl, payload, httpOptions);
+    return this.http.post<any>(this.backendUrl, formData, httpOptions);
   }
 }

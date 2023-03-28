@@ -4,11 +4,12 @@
     id="requestedAmount"
     type="number"
     min="20000"
-    [(ngModel)]="requestedAmount"
+    [ngModel]="getDisplayedRequestedAmount()"
+    (ngModelChange)="convertDisplayedRequestedAmount($event)"
     name="requestedAmount"
     required="true"
   />
 </div>
-<div *ngIf="requestedAmount < 20000" class="text-danger">
+<div *ngIf="requestedAmount < 20000000" class="text-danger">
   Requested amount must be at least 20000
 </div>

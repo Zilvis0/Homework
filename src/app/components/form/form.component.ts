@@ -16,8 +16,8 @@ interface FormData {
 })
 export class FormComponent {
   formData: FormData = {
-    monthlyIncome: 500,
-    requestedAmount: 20000,
+    monthlyIncome: 500000,
+    requestedAmount: 20000000,
     loanTerm: 36,
     children: 'NONE',
     coapplicant: 'NONE',
@@ -26,15 +26,13 @@ export class FormComponent {
   constructor(private apiService: ApiService) {}
 
   onSubmit(): void {
-    const formData = new FormData();
-    formData.append('monthlyIncome', this.formData.monthlyIncome.toString());
-    formData.append(
-      'requestedAmount',
-      this.formData.requestedAmount.toString()
-    );
-    formData.append('loanTerm', this.formData.loanTerm.toString());
-    formData.append('children', this.formData.children);
-    formData.append('coapplicant', this.formData.coapplicant);
+    const formData = {
+      monthlyIncome: this.formData.monthlyIncome,
+      requestedAmount: this.formData.requestedAmount,
+      loanTerm: this.formData.loanTerm,
+      children: this.formData.children,
+      coapplicant: this.formData.coapplicant,
+    };
 
     this.apiService.postForm(formData).subscribe(
       (response) => {

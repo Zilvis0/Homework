@@ -1,9 +1,13 @@
 {
   "/api": {
     "target": "https://homework.fdp.workers.dev/",
-    "secure": true,
-    "changeOrigin": true
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
   },
+  "logLevel": "debug",
   "headers": {
     "X-API-KEY": "swb-222222"
   }

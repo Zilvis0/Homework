@@ -10,6 +10,9 @@
     required="true"
   />
 </div>
+<div *ngIf="requestedAmount == null" class="text-danger">
+  Requested amount must be a valid number
+</div>
 <div *ngIf="requestedAmount < 20000000" class="text-danger">
   Requested amount must be at least 20000
 </div>

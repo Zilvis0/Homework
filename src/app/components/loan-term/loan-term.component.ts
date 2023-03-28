@@ -6,11 +6,15 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./loan-term.component.scss'],
 })
 export class LoanTermComponent {
-  @Input() loanTerm: number = 36;
+  @Input() loanTerm: number = 0;
   @Output() loanTermChange = new EventEmitter<number>();
 
+  constructor() {}
+
   updateLoanTerm(value: number): void {
-    this.loanTerm = value;
-    this.loanTermChange.emit(value);
+    if (value >= 36 && value <= 360) {
+      this.loanTerm = value;
+      this.loanTermChange.emit(value);
+    }
   }
 }

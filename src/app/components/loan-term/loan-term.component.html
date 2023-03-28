@@ -9,6 +9,9 @@
     name="loanTerm"
   />
 </div>
+<div *ngIf="loanTerm == null" class="text-danger">
+  Loan term must be a valid number
+</div>
 <div *ngIf="loanTerm < 36" class="text-danger">
   Loan term must be at least 36 months
 </div>

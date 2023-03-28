@@ -1,0 +1,6 @@
+<div>
+  <label for="loanAmount">Loan Amount:</label>
+  <div class="loanAmount" id="loanAmount" name="loanAmount">
+    {{ getDisplayedLoanAmount() | currency : "EUR" : "symbol-narrow" }}
+  </div>
+</div>

@@ -7,6 +7,8 @@ interface FormData {
   loanTerm: number;
   children: string;
   coapplicant: string;
+  loanAmount: number;
+  interestRate: number;
 }
 
 @Component({
@@ -21,9 +23,20 @@ export class FormComponent {
     loanTerm: 36,
     children: 'NONE',
     coapplicant: 'NONE',
+    loanAmount: 0,
+    interestRate: 0,
   };
 
   constructor(private apiService: ApiService) {}
+
+  isFormValid(): boolean {
+    return (
+      this.formData.monthlyIncome >= 500000 &&
+      this.formData.requestedAmount >= 20000000 &&
+      this.formData.loanTerm >= 36 &&
+      this.formData.loanTerm <= 360
+    );
+  }
 
   onSubmit(): void {
     const formData = {
@@ -35,11 +48,16 @@ export class FormComponent {
     };
 
     this.apiService.postForm(formData).subscribe(
-      (response) => {
+      (response: any) => {
         console.log('Request successful', response);
+        this.formData.loanAmount = response.loanAmount;
+        this.formData.interestRate = response.interestRate;
       },
       (error) => {
         console.log('Error occurred', error);
+        error.error.fields.map((obj: { params: string; message: string }) =>
+          console.log(obj.message)
+        );
       },
       () => {
         console.log('Request completed');

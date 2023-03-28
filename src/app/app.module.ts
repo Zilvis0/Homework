@@ -11,6 +11,8 @@ import { RequestedAmountComponent } from './components/requested-amount/requeste
 import { LoanTermComponent } from './components/loan-term/loan-term.component';
 import { ChildrenComponent } from './components/children/children.component';
 import { CoapplicantComponent } from './components/coapplicant/coapplicant.component';
+import { LoanAmountComponent } from './components/loan-amount/loan-amount.component';
+import { InterestRateComponent } from './components/interest-rate/interest-rate.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { CoapplicantComponent } from './components/coapplicant/coapplicant.compo
     LoanTermComponent,
     ChildrenComponent,
     CoapplicantComponent,
+    LoanAmountComponent,
+    InterestRateComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

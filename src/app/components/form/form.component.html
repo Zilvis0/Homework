@@ -12,5 +12,11 @@
   <app-children [(children)]="formData.children"></app-children>
 
   <app-coapplicant [(coapplicant)]="formData.coapplicant"></app-coapplicant>
-  <button (click)="onSubmit()">Submit</button>
+  <button [disabled]="!isFormValid()" (click)="onSubmit()">Submit</button>
+  <div class="output">
+    <app-loan-amount [loanAmount]="formData.loanAmount"></app-loan-amount>
+    <app-interest-rate
+      [interestRate]="formData.interestRate"
+    ></app-interest-rate>
+  </div>
 </div>

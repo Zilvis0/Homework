@@ -12,9 +12,7 @@ export class LoanTermComponent {
   constructor() {}
 
   updateLoanTerm(value: number): void {
-    if (value >= 36 && value <= 360) {
-      this.loanTerm = value;
-      this.loanTermChange.emit(value);
-    }
+    this.loanTerm = value;
+    this.loanTermChange.emit(value);
   }
 }

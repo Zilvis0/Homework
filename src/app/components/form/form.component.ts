@@ -46,7 +46,6 @@ export class FormComponent {
       children: this.formData.children,
       coapplicant: this.formData.coapplicant,
     };
-
     this.apiService.postForm(formData).subscribe(
       (response: any) => {
         console.log('Request successful', response);

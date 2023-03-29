@@ -8,11 +8,17 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class CoapplicantComponent {
   @Input() coapplicant: string = 'NONE';
   @Output() coapplicantChange = new EventEmitter<string>();
+  @Input() isHighlighted: boolean = false;
+  @Input() errorMessage: string = '';
 
   constructor() {}
 
-  updateChildren(value: string): void {
+  updateCoapplicant(value: string): void {
     this.coapplicant = value;
     this.coapplicantChange.emit(value);
+  }
+
+  highlightError(): void {
+    this.isHighlighted = true;
   }
 }

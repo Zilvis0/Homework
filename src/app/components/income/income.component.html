@@ -4,12 +4,18 @@
     id="income"
     type="number"
     min="500"
-    [ngModel]="getDisplayedIncome()"
-    (ngModelChange)="convertDisplayedIncome($event)"
+    [ngModel]="income / 1000"
+    (ngModelChange)="updateIncome($event)"
     name="income"
+    [class.highlighted]="isHighlighted"
     required="true"
   />
 </div>
 <div *ngIf="income < 500000" class="text-danger">
   Income must be at least 500
 </div>
+<div *ngIf="income == null" class="text-danger">
+  Income must be a valid number
+</div>
+<div *ngIf="income == 0" class="text-danger">Income cannot be zero</div>
+<div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>

@@ -4,15 +4,20 @@
     id="requestedAmount"
     type="number"
     min="20000"
-    [ngModel]="getDisplayedRequestedAmount()"
-    (ngModelChange)="convertDisplayedRequestedAmount($event)"
+    [ngModel]="requestedAmount / 1000"
+    (ngModelChange)="updateRequestedAmount($event)"
     name="requestedAmount"
     required="true"
+    [class.highlighted]="isHighlighted"
   />
 </div>
 <div *ngIf="requestedAmount === null" class="text-danger">
   Requested amount must be a valid number
 </div>
+<div *ngIf="requestedAmount === 0" class="text-danger">
+  Requested amount cannot be zero
+</div>
 <div *ngIf="requestedAmount < 20000000" class="text-danger">
   Requested amount must be at least 20000
 </div>
+<div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>

@@ -5,9 +5,11 @@
     type="number"
     min="36"
     max="360"
-    [(ngModel)]="loanTerm"
+    [ngModel]="loanTerm"
+    (ngModelChange)="updateLoanTerm($event)"
     name="loanTerm"
     required="true"
+    [class.highlighted]="isHighlighted"
   />
 </div>
 <div *ngIf="loanTerm == null" class="text-danger">
@@ -22,3 +24,4 @@
 <div *ngIf="loanTerm !== null && loanTerm === 0" class="text-danger">
   Loan term cannot be zero
 </div>
+<div *ngIf="errorMessage" class="text-danger">{{ errorMessage }}</div>

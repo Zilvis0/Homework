@@ -8,22 +8,19 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class RequestedAmountComponent implements OnInit {
   @Input() requestedAmount: number = 20000;
   @Output() requestedAmountChange = new EventEmitter<number>();
+  @Input() isHighlighted: boolean = false;
+  @Input() errorMessage: string = '';
 
   constructor() {}
 
   ngOnInit(): void {}
 
   updateRequestedAmount(value: number): void {
-    this.requestedAmount = value;
-    this.requestedAmountChange.emit(value);
+    this.requestedAmount = value * 1000;
+    this.requestedAmountChange.emit(value * 1000);
   }
 
-  getDisplayedRequestedAmount(): string {
-    return (this.requestedAmount / 1000).toFixed(0);
-  }
-
-  convertDisplayedRequestedAmount(displayedRequestedAmount: string): void {
-    this.requestedAmount = parseInt(displayedRequestedAmount) * 1000;
-    this.requestedAmountChange.emit(this.requestedAmount);
+  highlightError(): void {
+    this.isHighlighted = true;
   }
 }

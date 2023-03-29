@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
+import { IncomeComponent } from '../income/income.component';
+import { RequestedAmountComponent } from '../requested-amount/requested-amount.component';
+import { LoanTermComponent } from '../loan-term/loan-term.component';
+import { ChildrenComponent } from '../children/children.component';
+import { CoapplicantComponent } from '../coapplicant/coapplicant.component';
 
 interface FormData {
   monthlyIncome: number;
@@ -17,6 +22,13 @@ interface FormData {
   styleUrls: ['./form.component.scss'],
 })
 export class FormComponent {
+  @ViewChild(IncomeComponent) monthlyIncome!: IncomeComponent;
+  @ViewChild(RequestedAmountComponent)
+  requestedAmount!: RequestedAmountComponent;
+  @ViewChild(LoanTermComponent) loanTerm!: LoanTermComponent;
+  @ViewChild(ChildrenComponent) children!: ChildrenComponent;
+  @ViewChild(CoapplicantComponent) coapplicant!: CoapplicantComponent;
+
   formData: FormData = {
     monthlyIncome: 500000,
     requestedAmount: 20000000,
@@ -38,6 +50,11 @@ export class FormComponent {
     );
   }
 
+  resetOutput(): void {
+    this.formData.loanAmount = 0;
+    this.formData.interestRate = 0;
+  }
+
   onSubmit(): void {
     const formData = {
       monthlyIncome: this.formData.monthlyIncome,
@@ -48,19 +65,56 @@ export class FormComponent {
     };
     this.apiService.postForm(formData).subscribe(
       (response: any) => {
-        console.log('Request successful', response);
+        const components = [
+          this.monthlyIncome,
+          this.requestedAmount,
+          this.loanTerm,
+          this.children,
+          this.coapplicant,
+        ];
+
         this.formData.loanAmount = response.loanAmount;
         this.formData.interestRate = response.interestRate;
+
+        for (const component of components) {
+          component.errorMessage = '';
+          component.isHighlighted = false;
+        }
       },
       (error) => {
-        console.log('Error occurred', error);
-        error.error.fields.map((obj: { params: string; message: string }) =>
-          console.log(obj.message)
-        );
+        error.error.fields.map((obj: { params: string; message: string }) => {
+          switch (obj.params) {
+            case 'monthlyIncome':
+              this.monthlyIncome.highlightError();
+              this.monthlyIncome.errorMessage = obj.message;
+              this.resetOutput();
+              break;
+            case 'requestedAmount':
+              this.requestedAmount.highlightError();
+              this.requestedAmount.errorMessage = obj.message;
+              this.resetOutput();
+              break;
+            case 'loanTerm':
+              this.loanTerm.highlightError();
+              this.loanTerm.errorMessage = obj.message;
+              this.resetOutput();
+              break;
+            case 'children':
+              this.children.highlightError();
+              this.children.errorMessage = obj.message;
+              this.resetOutput();
+              break;
+            case 'coapplicant':
+              this.coapplicant.highlightError();
+              this.coapplicant.errorMessage = obj.message;
+              this.resetOutput();
+              break;
+            default:
+              break;
+          }
+        });
       },
-      () => {
-        console.log('Request completed');
-      }
+      () => {}
     );
   }
 }

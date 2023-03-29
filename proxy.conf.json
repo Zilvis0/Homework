@@ -7,8 +7,5 @@
       "^/api": ""
     }
   },
-  "logLevel": "debug",
-  "headers": {
-    "X-API-KEY": "swb-222222"
-  }
+  "logLevel": "debug"
 }

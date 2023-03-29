@@ -8,6 +8,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class ChildrenComponent {
   @Input() children: string = 'NONE';
   @Output() childrenChange = new EventEmitter<string>();
+  @Input() isHighlighted: boolean = false;
+  @Input() errorMessage: string = '';
 
   constructor() {}
 
@@ -16,5 +18,9 @@ export class ChildrenComponent {
   updateChildren(value: string): void {
     this.children = value;
     this.childrenChange.emit(value);
+  }
+
+  highlightError(): void {
+    this.isHighlighted = true;
   }
 }
